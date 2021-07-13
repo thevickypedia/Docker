@@ -12,6 +12,8 @@ docker build -t test .
 ```bash
 docker run test
 ```
+###### Docker compose
+[`docker-compose up`](https://docs.docker.com/compose/reference/up/)
 ###### Docker List all Containers
 ```bash
 docker ps -a -q
