@@ -58,4 +58,32 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -q) -f
 docker builder prune
 ```
+
+Alias for docker cleanup
+```shell
+alias clean-docker='function _clean_docker() { \
+    clear; \
+    echo "*****************************************************************************************************************"; \
+    echo "*****************************************************************************************************************"; \
+    echo ""; \
+    echo "The following containers and their images will be removed."; \
+    echo ""; \
+    echo "$(docker ps -a)"; \
+    echo ""; \
+    echo "*****************************************************************************************************************"; \
+    echo "*****************************************************************************************************************"; \
+    read -r -p "Are you sure you want to continue? <Y/N> " prompt; \
+    if [[ $prompt =~ [yY](es)* ]]; then \
+        docker stop $(docker ps -a -q); \
+        docker rm $(docker ps -a -q); \
+        docker rmi $(docker images -q) -f; \
+        docker builder prune; \
+    else \
+        echo ""; \
+        echo "***************************************************************************************************************"; \
+        echo "Deletion cancelled"; \
+        echo "***************************************************************************************************************"; \
+    fi; \
+}; _clean_docker'
+```
 </details>
